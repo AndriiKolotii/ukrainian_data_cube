@@ -6,5 +6,12 @@
 4. Place SNAP graph for Sentinel-1 data processing to `/home/localuser/snap`
 5. Place wrapper `proc.sh` from this repo to `/data/s1_grdh/src`
 6. Add Sentinel-1 product to DataCube with `datacube product add s1_l3comp_scenes.yaml`
+Directory listing
+`/data/s1_grdh/src$ ls -R
+.:
+aux  dwn.py  proc.sh
+
+./aux:
+s1_prepare_metadata.py  s1_scene_kyiv_10m.yaml  s1_scene_kyiv_10m_sri.yaml`
 7. Download GRDH products from Alaska Space Facilties Vertex with in zip format to `/data/s1_grdh/src`
 8. Launch processing, indexing and ingesting with `bash proc.sh` command
