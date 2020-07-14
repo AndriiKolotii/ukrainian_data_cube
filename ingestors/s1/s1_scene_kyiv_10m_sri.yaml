@@ -1,0 +1,68 @@
+source_type: s1_scene_envi
+output_type: s1_scene_kyiv_10m_sri_ingest
+
+description: Sentinel-1 data prepared by SRI,  10 metre,Ukraine,UTM zone  36N projection (EPSG:32636)
+
+location: '/data/ingested_data'
+file_path_template: 's1_10m/s1_10m_32636_{tile_index[0]}_{tile_index[1]}_{start_time}.nc'
+
+global_attributes:
+  title: Kyiv Data Cube - Sentinel 1
+  summary: Sentinel-1 Synthetic Aperture Radar processed by SRI
+  history: Refer to D. Small, 'Flattening Gamma Radiometric Terrain Correction for SAR Imagery', IEEE TGRS, 49(8), pp. 3081 to 3093, Aug. 2011. doi 10.1109/TGRS.2011.2120616 and D. Small, 'SAR backscatter multitemporal compositing via local resolution weighting', in IGARSS, 2012, Munich, Germany, pp. 4521 to 4524. doi 10.1109/IGARSS.2012.6350465
+  institution: SRI
+  instrument: SAR
+  cdm_data_type: Grid
+  keywords: ESA,SAR,EARTH SCIENCE
+  keywords_vocabulary: GCMD
+  platform: SENTINEL-1
+  processing_level: L3
+  product_version: '1.0.0'
+  product_suite: Sentinel-1
+  project: SDC
+  publisher_email: andrew.k.911@gmail.com
+  publisher_name: SRI
+  publisher_url: www.inform.ikd.kiev.ua
+  coverage_content_type: physicalMeasurement
+  license: https://creativecommons.org/licenses/by/4.0/
+  naming_authority: SRI
+  acknowledgment: Sentinel-1 data is provided by the European Space Agency on behalf of the European Commission via download. Contains modified Copernicus Sentinel data [2014-2019].
+
+
+storage:
+  driver: NetCDF CF
+  
+  crs: EPSG:32636
+  tile_size:
+          x: 100000.0
+          y: 100000.0
+  resolution:
+          x: 10
+          y: -10
+  chunking:
+      longitude: 200
+      latitude: 200
+      time: 1
+  dimension_order: ['time', 'latitude', 'longitude']
+
+measurements:
+    - name: vh
+      dtype: float32
+      nodata: -9999
+      units: '1'
+      resampling_method: nearest
+      src_varname: 'vh_gamma0'
+      zlib: True
+      attrs:
+          long_name: "L3 12 day backscatter composite Gamma0 VH (C-Band)"
+          alias: "VH"
+    - name: vv
+      dtype: float32
+      nodata: -9999
+      units: '1'
+      resampling_method: nearest
+      src_varname: 'vv_gamma0'
+      zlib: True
+      attrs:
+          long_name: "L3 12 day backscatter composite Gamma0 VV (C-Band)"
+          alias: "VV"
